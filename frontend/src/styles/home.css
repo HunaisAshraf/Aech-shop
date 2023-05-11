@@ -1,0 +1,32 @@
+.content{
+    text-align: center;
+    background-image: url("https://wallpapercave.com/wp/wp5001715.jpg");
+    background-size: cover;
+    height: 100vh;
+    margin: 25px;
+    border-radius: 3px;
+}
+.home-content {
+    color: rgb(222, 222, 222);
+    position: relative;
+    top: 10%;
+}
+
+.home-content h1{
+    font-size: 3.5rem;
+    margin-bottom: 0px;
+    font-family: 'Fjalla One', sans-serif;
+    font-weight: 900;
+}
+
+.home-content p{
+    margin: 0 30%;
+    font-size: 1.4rem;
+}
+
+.figure{
+    height: 500px;
+    width: 450px;
+    margin: 30px 20px;
+    border-radius: 3px;
+}

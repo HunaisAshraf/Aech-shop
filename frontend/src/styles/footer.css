@@ -1,0 +1,42 @@
+.footer{
+    text-align: center;
+    background-color: #1e1e1e;
+    color: #9fa1a2;
+    padding: 10px;
+}
+
+
+.social a{
+    padding: 15px 2px;
+    font-size: 2.1rem;
+    text-decoration: none;
+    color: #9fa1a2;
+}
+
+.social p{
+    margin-top: 10px;
+
+}
+
+.terms li{
+    list-style: none;
+}
+
+.terms a{
+    text-decoration: none;
+    color: #9fa1a2;
+    margin-right: 10px;
+}
+
+.terms p{
+    margin: 10px 0 0 0;
+    padding-bottom: 20px;
+}
+
+.copyright p{
+    margin-bottom: 0;
+}
+
+.footer :hover{
+    color: white;
+}
