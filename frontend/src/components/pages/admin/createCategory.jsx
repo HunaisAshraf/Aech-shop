@@ -78,7 +78,7 @@ const CreateCategory = () => {
 
   return (
     <Layout title={"create-category"}>
-      <div className="container-fluid m-3 p-3">
+      <div className="container-fluid my-3 p-3" style={{borderLeft: "2px solid #c5cbf4"}}>
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import { FaShoppingBag } from "react-icons/fa";
 // import { CgProfile } from "react-icons/cg";
 import "../../styles/navbar.css";
@@ -6,11 +6,15 @@ import { NavLink } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import SearchInput from "../form/searchInput";
 import { useCart } from "../../context/cart";
-import { Badge} from "antd"
+import { Badge } from "antd";
+import { FaShoppingBag } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
+import { AiOutlineSearch } from "react-icons/ai";
 
 function NavBar() {
   const [auth, setAuth] = useAuth();
-  const [cart] = useCart([])
+  const [cart] = useCart([]);
+  const [show, setShow] = useState(false);
 
   const handleLogout = () => {
     setAuth({
@@ -22,9 +26,9 @@ function NavBar() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container container-fluid">
-        <NavLink className="navbar-brand" href="#">
+        <NavLink className="navbar-brand" to="/">
           Aech
         </NavLink>
         <button
@@ -38,13 +42,13 @@ function NavBar() {
         >
           <span className="navbar-toggler-icon" />
         </button>
-        <div className="collapse navbar-collapse bg-light p-3" id="navbarNav">
-          <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
+        <div className="collapse navbar-collapse p-3" id="navbarNav">
+          {/* <ul className="navbar-nav ms-auto">
+            <li className="nav-item search">
               <SearchInput />
             </li>
-          </ul>
-          <ul className="navbar-nav ms-auto">
+          </ul> */}
+          <ul className="navbar-nav link">
             <li className="nav-item">
               <NavLink
                 to="/"
@@ -61,14 +65,34 @@ function NavBar() {
               </NavLink>
             </li>
             <li className="nav-item">
-                <NavLink to="/cart" className="nav-link ">
-                  <Badge  className="nav-link p-1" count={cart.length} >
-                  
-                    Cart
-                    {/* <FaShoppingBag style={{ fontSize: "1.4rem" }} /> */}
-                  </Badge>
-                  </NavLink>
-                </li>
+              <NavLink to="/about" className="nav-link">
+                About
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/contact" className="nav-link">
+                Contact
+              </NavLink>
+            </li>
+          </ul>
+          <ul className="navbar-nav ms-auto">
+           {show?( <li className="nav-item mt-2 search">
+              <SearchInput />
+            </li>):null}
+            <li className="nav-item">
+              <button className=" nav-link" onClick={() => setShow(!show)}>
+                <AiOutlineSearch
+                  style={{ fontSize: "1.4rem", fontWeight: "900" }}
+                />
+              </button>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/cart" className="nav-link ">
+                <Badge className="nav-link p-1" count={cart.length}>
+                  <FaShoppingBag style={{ fontSize: "1.4rem" }} />
+                </Badge>
+              </NavLink>
+            </li>
           </ul>
           {!auth.user ? (
             <>
@@ -92,18 +116,21 @@ function NavBar() {
           ) : (
             <>
               <ul className="navbar-nav">
-               
                 <li className="nav-item dropdown">
                   <NavLink
-                    className="nav-link dropdown-toggle"
+                    className="nav-link dropdown"
                     role="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {auth.user.name}
-                    {/* <CgProfile style={{ fontSize: "1.5rem" }} /> */}
+                    <CgProfile style={{ fontSize: "1.5rem" }} />
                   </NavLink>
                   <ul className="dropdown-menu">
+                    <li className="name">
+                      <h4 className="px-3 py-2" style={{ color: "#ffffff" }}>
+                        Hi {auth.user.name}!
+                      </h4>
+                    </li>
                     <li>
                       <NavLink
                         to={`/dashboard/${

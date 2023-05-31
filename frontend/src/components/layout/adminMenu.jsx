@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const AdminMenu = () => {
   return (
     <>
-      <div className="text-center">
+      <div className="text-center" >
         <div className="list-group">
           <Link to="/dashboard/admin">
             <h3>Admin Panel</h3>

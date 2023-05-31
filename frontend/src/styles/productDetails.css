@@ -1,0 +1,36 @@
+.single-product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.prdt-img {
+  margin: 10px 10px;
+}
+.prdt-details {
+  width: 400px;
+}
+.prdt-title {
+  font-size: 2rem;
+  font-weight: 600;
+  /* margin-top: 10px; */
+  margin-bottom: 20px;
+}
+.prdt-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.prdt-btn {
+  background-color: #2d1774;
+  color: white;
+  margin-top: 60px;
+  padding: 10px 50px;
+}
+
+.rating {
+  color: rgb(255, 136, 0);
+  font-size: 1.3rem;
+}

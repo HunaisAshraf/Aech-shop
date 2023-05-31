@@ -1,16 +1,39 @@
-.navbar{
-    padding: 0;
-    width: 100%;
-    height: 70px;
-    font-size: 1.2rem;
-    color: black;
-    box-shadow: 1px 1px 5px rgb(210, 210, 210);
+.navbar {
+  padding: 0;
+  width: 100%;
+  height: 70px;
+  font-size: 1.2rem;
+  background-color: #090125;
+  color: white;
+  box-shadow: 1px 1px 5px #11004b;
+  border-end-end-radius: 5px;
 }
 
-.logo{
-    font-size: 2rem;
+.link{
+    margin:auto;
+}
+.link li{
+    padding:0 10%;
 }
 
-.nav-link{
-    
+
+.collapse {
+  z-index: 1;
+  background-color: #090125;
+  height: 70px;
+}
+.navbar-brand {
+  font-size: 2.2rem;
+}
+
+.nav-link,
+.nav-item {
+  color: #ffffff;
+}
+
+.name {
+  background-color: #11004b;
+}
+.search {
+  width: 400px;
 }

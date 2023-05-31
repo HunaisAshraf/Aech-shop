@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../layout/layout";
 import { useCart } from "../../context/cart";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import DropIn from "braintree-web-drop-in-react";
 
 const Cart = () => {
   const [auth, setAuth] = useAuth();
   const [cart, setCart] = useCart();
+  const [clientToken, setClientToken] = useState("");
+  const [instance, setInstance] = useState("");
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
+
+  //total price
+
+  const totalPrice = () => {
+    try {
+      let total = 0;
+      cart.map((item) => {
+        total = total + item.price;
+      });
+      return total.toLocaleString("hi-IN");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // delete item
   const removeCartItem = (id) => {
@@ -24,48 +43,59 @@ const Cart = () => {
     }
   };
 
-  //total price
-
-  const totalPrice = () => {
-    try {
-      let total = 0;
-      cart.map((item) => {
-        total = total + item.price;
-        
-
-      });
-      return total;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   //placeOrder
   const handleOrder = async () => {
     try {
       let user = auth.user;
       const res = await axios.post("/api/place-order", { cart, user });
-      if(res.data.success){
-        toast.success(res.data.message)
-        navigate("/dashboard/user")
+      if (res.data.success) {
+        toast.success(res.data.message);
+        navigate("/dashboard/user");
       }
     } catch (error) {
       console.log(error);
     }
   };
 
+  //get payment token
+  const getToken = async () => {
+    try {
+      const { data } = await axios.get("/api/braintree/token");
+      setClientToken(data.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getToken();
+  }, [auth.token]);
+
+  //handle Paymentt
+  const handlePayment = async () => {
+    try {
+      setLoading(true);
+      const { nonce } = await instance.requestPaymentMethod();
+      const { data } = await axios.post("/api/braintree/payment", {
+        nonce,
+        cart,
+      });
+      setLoading(false);
+      localStorage.removeItem("cart");
+      setCart([]);
+      navigate("/dashboard/user/orders");
+      toast.success("Payment Success");
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
   return (
     <Layout>
       <div className="container">
-        <div className="text-center">
-          <h1>{`Hello ${auth.token && auth.user.name}`}</h1>
-          <h1>
-            {cart.length > 0
-              ? `You have ${cart.length} items in your cart ${
-                  auth.token ? " " : "please login to checkout"
-                }`
-              : "please login to checkout"}
-          </h1>
+        <div className="text-center py-4">
+          <h3>Your Cart</h3>
         </div>
         <div className="row">
           <div className="col-md-9">
@@ -81,7 +111,7 @@ const Cart = () => {
                 <div className="col-md-8">
                   <h5>{p.name}</h5>
                   <p>{p.description.substring(0, 50)}....</p>
-                  <h6>Price : ₹ {p.price}</h6>
+                  <h6>Price : ₹ {p.price.toLocaleString("hi-IN")}</h6>
                   <button
                     className="btn btn-danger"
                     onClick={() => removeCartItem(p._id)}
@@ -92,34 +122,65 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          <div className="col-md-3">
+          <div className="summary col-md-3">
             <h2>Cart Summary</h2>
+            <h6>
+              {cart.length > 0
+                ? `You have ${cart.length} items in your cart ${
+                    auth.token ? " " : "please login to checkout"
+                  }`
+                : "please login to checkout"}
+            </h6>
             <p>Checkout</p>
             <hr />
             <h4> Total : ₹ {totalPrice()}</h4>
             <hr />
             {auth.token ? (
               <>
-                <div className="mb-3">
+                <div className="mb-3 text-center">
                   <h6>Address : {auth.user.address}</h6>
-                  <button
-                    className="btn btn-warning mt-5"
+                  {/* <button
+                    className="btn btn-warning mt-3 w-75"
                     onClick={handleOrder}
                   >
                     Checkout
-                  </button>
+                  </button> */}
                 </div>
               </>
             ) : (
-              <div className="mb-3">
+              <div className="mb-3  text-center">
                 <button
-                  className="btn btn-warning"
+                  className="btn btn-warning w-75"
                   onClick={() => navigate("/login")}
                 >
                   Login To Checkout
                 </button>
               </div>
             )}
+            <div className="my-4  text-center">
+              {!clientToken || !cart.length || !auth.token ? (
+               null
+              ) : (
+                <>
+                  <DropIn
+                    options={{
+                      authorization: clientToken,
+                      paypal: {
+                        flow: "valut",
+                      },
+                    }}
+                    onInstance={(instance) => setInstance(instance)}
+                  />
+                  <button
+                    className="btn btn-primary w-75"
+                    onClick={handlePayment}
+                    disabled={loading || !instance || auth.user.addresss}
+                  >
+                    {loading ? "Processing..." : "Payment"}
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

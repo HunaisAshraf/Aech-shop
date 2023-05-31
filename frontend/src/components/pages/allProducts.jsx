@@ -6,6 +6,7 @@ import { prices } from "../prices";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useCart } from "../../context/cart";
+import "../../styles/allProducts.css";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -69,6 +70,17 @@ const AllProducts = () => {
     }
   };
 
+  // const handleCart = (product) => {
+  //   if(cart.includes(product)){
+  //     console.log("duplicate");
+  //   }else{
+
+  //     setCart([...cart, product]);
+  //     localStorage.setItem("cart", JSON.stringify([...cart, product]));
+  //     toast.success("Item Added To Cart");
+  //   }
+  // };
+
   useEffect(() => {
     if (checked.length || radio.length) {
       filteredProducts();
@@ -77,8 +89,9 @@ const AllProducts = () => {
   }, [checked, radio]);
   return (
     <Layout title={"All-products"}>
-      <div className="container-fluid row m-2">
-        <div className="col-md-2 mt-3">
+      <div className="product-page container-fluid row">
+        <div className="filter col-md-2 mt-3">
+          <h1 className="text-center">FILTERS</h1>
           {/* category filter */}
 
           <h4>Filter by category</h4>
@@ -118,7 +131,7 @@ const AllProducts = () => {
             </button>
           </div>
         </div>
-        <div className="col-md-10">
+        <div className="list col-md-10">
           <h1 className="text-center">All products</h1>
           <div className="d-flex flex-wrap">
             {products.map((product) => (
@@ -134,9 +147,9 @@ const AllProducts = () => {
                 />
                 <div className="card-body">
                   <h6 className="card-title">{product.name}</h6>
-                  <p className="card-text">₹ {product.price}</p>
+                  <p className="card-text">₹ {(product.price).toLocaleString('hi-IN')}</p>
                   <button
-                    className="btn btn-primary ms-2"
+                    className="btn btn-detail ms-2"
                     onClick={() => navigate(`/product/${product.slug}`)}
                   >
                     More Details
@@ -144,9 +157,13 @@ const AllProducts = () => {
                   <button
                     className="btn btn-secondary ms-2"
                     onClick={() => {
+                      // handleCart(product);
                       setCart([...cart, product]);
-                      localStorage.setItem("cart",JSON.stringify([...cart,product]))
-                      toast.success("Item Added To Cart")
+                      localStorage.setItem(
+                        "cart",
+                        JSON.stringify([...cart, product])
+                      );
+                      toast.success("Item Added To Cart");
                     }}
                   >
                     Add to cart
