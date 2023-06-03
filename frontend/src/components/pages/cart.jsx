@@ -44,18 +44,7 @@ const Cart = () => {
   };
 
   //placeOrder
-  const handleOrder = async () => {
-    try {
-      let user = auth.user;
-      const res = await axios.post("/api/place-order", { cart, user });
-      if (res.data.success) {
-        toast.success(res.data.message);
-        navigate("/dashboard/user");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   //get payment token
   const getToken = async () => {
@@ -83,7 +72,7 @@ const Cart = () => {
       setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
-      navigate("/dashboard/user/orders");
+      navigate("/dashboard/user");
       toast.success("Payment Success");
     } catch (error) {
       console.log(error);

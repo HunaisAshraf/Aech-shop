@@ -69,34 +69,46 @@ const AllProducts = () => {
       <div className="home ">
         <div className="banner d-flex flex-wrap py-4 justify-content-evenly">
           <div className="mb-2">
-            <img
+            
+          <Link to="all-products">
+          <img
               width={630}
-              src="https://scontent.fcjb5-1.fna.fbcdn.net/v/t1.6435-9/124863753_4769601339749109_7669238375257339666_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=973b4a&_nc_ohc=ipxQZnWaX1gAX_jxHHD&_nc_ht=scontent.fcjb5-1.fna&oh=00_AfBgL_d1yc_KuqjR1Y9kpjH9EkVVkp3YymS7ZfGOB_xOqA&oe=649C0517"
+              src="/images/laptop.jpg"
               alt="aech"
             />
+          </Link>
           </div>
           <div>
             <div className="d-flex flex-wrap align-item-center">
+            <Link to="all-products">
+
               <img
                 className="mb-2 ms-2"
                 height={360}
-                src="https://pbs.twimg.com/media/EQzTuNaXsAEbFEK.jpg"
+                src="/images/mobile.jpg"
                 alt=""
               />
+            </Link>
+            <Link to="all-products">
+
               <img
                 className="mb-2 ms-2"
                 height={360}
-                src="https://cdn.shopify.com/s/files/1/0057/8938/4802/files/131_Shot_4.3.png?v=1684917048"
+                src="/images/bluetooth.jpg"
                 alt="aech"
               />
+            </Link>
             </div>
             <div>
+            <Link to="all-products">
+
               <img
                 className="ms-2"
                 width={730}
-                src="https://helix-watches.com/media/weltpixel/owlcarouselslider/images/m/e/metal_fit_banner_11zon_1_1_.jpg"
+                src="/images/smart.jpg"
                 alt=""
               />
+            </Link>
             </div>
           </div>
         </div>

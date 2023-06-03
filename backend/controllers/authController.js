@@ -124,7 +124,6 @@ export const testController = (req, res) => {
 //orders
 export const getOrderController = async (req, res) => {
   try {
-
     const orders = await orderModel
       .find({ buyer: req.user._id })
       .populate("products", "-photo")
@@ -135,6 +134,46 @@ export const getOrderController = async (req, res) => {
     res.status(500).send({
       success: false,
       message: "error in orders",
+      error,
+    });
+  }
+};
+
+// all order
+export const getAllOrderController = async (req, res) => {
+  try {
+    const orders = await orderModel
+      .find({})
+      .populate("products", "-photo")
+      .populate("buyer", "name")
+      .sort({ createdAt: -1 });
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error in all-orders",
+      error,
+    });
+  }
+};
+
+//updateOrder
+export const orderStatusController = async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+
+    const orders = await orderModel.findByIdAndUpdate(
+      orderId,
+      { status },
+      { new: true }
+    );
+    res.json(orders)
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "error in updating order orders",
       error,
     });
   }

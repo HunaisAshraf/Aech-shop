@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../../context/auth";
+import "../../styles/login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -40,41 +41,45 @@ const Login = () => {
 
   return (
     <Layout title={"login"}>
-      <div className="register">
-        <h1>Sign In</h1>
-        <form className="w-25" onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="exampleInputEmail1" className="form-label">
-              Email address
-            </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              required
-            />
-          </div>
+      <div className="login">
+        <div className="login-form">
+          <form className="w-100" onSubmit={handleSubmit}>
+            <h1 className="text-center">Sign In</h1>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
+                Email address
+              </label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                required
+              />
+            </div>
 
-          <div className="mb-3">
-            <label htmlFor="exampleInputPassword1" className="form-label">
-              Password
-            </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => SetPassword(e.target.value)}
-              className="form-control"
-              id="exampleInputPassword1"
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>
+            <div className="mb-3">
+              <label htmlFor="exampleInputPassword1" className="form-label">
+                Password
+              </label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => SetPassword(e.target.value)}
+                className="form-control"
+                id="exampleInputPassword1"
+                required
+              />
+            </div>
+            <div className="text-center">
+              <button type="submit" className="btn btns w-75">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </Layout>
   );

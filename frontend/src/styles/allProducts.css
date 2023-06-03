@@ -16,3 +16,8 @@
 .filter{
     padding: 0px 25px;
 }
+
+.bd-btm{
+  padding: 10px 0px;
+  border-bottom: 2px solid  #2d108e;
+}

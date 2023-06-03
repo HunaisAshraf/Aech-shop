@@ -103,7 +103,8 @@ const UpdateProduct = () => {
 
   return (
     <Layout>
-      <div className="container-fluid my-3 p-3">
+      <div className="container-fluid my
+      -3 p-3">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />

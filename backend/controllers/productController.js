@@ -323,8 +323,8 @@ export const braintreePaymentController = async (req, res) => {
             products: cart,
             payment: result,
             buyer: req.user._id,
-          })
-           order.save();
+          });
+          order.save();
           res.json({ ok: true });
         } else {
           res.status(500).send(error);

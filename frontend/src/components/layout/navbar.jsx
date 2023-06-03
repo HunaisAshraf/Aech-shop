@@ -43,11 +43,7 @@ function NavBar() {
           <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse p-3" id="navbarNav">
-          {/* <ul className="navbar-nav ms-auto">
-            <li className="nav-item search">
-              <SearchInput />
-            </li>
-          </ul> */}
+          
           <ul className="navbar-nav link">
             <li className="nav-item">
               <NavLink

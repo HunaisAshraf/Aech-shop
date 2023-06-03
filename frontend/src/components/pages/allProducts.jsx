@@ -91,14 +91,15 @@ const AllProducts = () => {
     <Layout title={"All-products"}>
       <div className="product-page container-fluid row">
         <div className="filter col-md-2 mt-3">
-          <h1 className="text-center">FILTERS</h1>
+          <h1 className="text-center bd-btm" >FILTERS</h1>
+
           {/* category filter */}
 
-          <h4>Filter by category</h4>
+          <h4 className="bd-btm">Filter by category</h4>
           <div className="d-flex flex-column">
             {categories.map((c) => (
               <Checkbox
-                className="ms-2"
+                className="m-1"
                 key={c._id}
                 onChange={(e) => handleFilter(e.target.checked, c._id)}
               >
@@ -109,10 +110,10 @@ const AllProducts = () => {
 
           {/* price filter */}
 
-          <h4 className="mt-4">Filter by Price</h4>
+          <h4 className=" bd-btm mt-4">Filter by Price</h4>
           <div className="d-flex flex-column">
             <Radio.Group
-              className="ms-2"
+              className="m-1"
               onChange={(e) => setRadio(e.target.value)}
             >
               {prices.map((p) => (

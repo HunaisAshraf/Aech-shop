@@ -28,6 +28,12 @@ const AdminMenu = () => {
             Products
           </Link>
           <Link
+            to="/dashboard/admin/orders"
+            className="list-group-item list-group-item-action"
+          >
+            Orders
+          </Link>
+          <Link
             to="/dashboard/admin/users"
             className="list-group-item list-group-item-action"
           >

@@ -15,14 +15,13 @@ import AdminRoute from "./components/routes/adminRoute";
 import CreateCategory from "./components/pages/admin/createCategory";
 import CreateProduct from "./components/pages/admin/createProduct";
 import Users from "./components/pages/admin/users";
-import Profile from "./components/pages/user/profile";
-import Orders from "./components/pages/user/orders";
 import Products from "./components/pages/admin/products";
 import UpdateProduct from "./components/pages/admin/updateProduct";
 import AllProducts from "./components/pages/allProducts";
 import Search from "./components/pages/searchProduct";
 import ProductDetails from "./components/pages/productDetails";
 import Cart from "./components/pages/cart";
+import AdminOrders from "./components/pages/admin/adminOrders";
 
 function App() {
   return (
@@ -33,8 +32,6 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<UserDashboard />} />
-          <Route path="user/profile" element={<Profile />} />
-          <Route path="user/orders" element={<Orders />} />
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
@@ -42,6 +39,7 @@ function App() {
           <Route path="admin/create-product" element={<CreateProduct />} />
           <Route path="admin/products" element={<Products />} />
           <Route path="admin/product/:slug" element={<UpdateProduct />} />
+          <Route path="admin/orders" element={<AdminOrders />} />
           <Route path="admin/users" element={<Users />} />
         </Route>
         <Route path="/register" element={<Register />} />

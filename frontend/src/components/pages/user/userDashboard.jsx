@@ -3,7 +3,7 @@ import Layout from "../../layout/layout";
 import { useAuth } from "../../../context/auth";
 import axios from "axios";
 import moment from "moment";
-import "../../../styles/userProfile.css"
+import "../../../styles/userDashboard.css";
 
 const UserDashboard = () => {
   const [auth] = useAuth();
@@ -25,17 +25,17 @@ const UserDashboard = () => {
 
   return (
     <Layout title={"Dashboard"}>
-      <div className="container-fluid mt-3 p-3">
-        <div className="m-4">
-          <h1>Profile</h1>
-          <div className="mb-3 ps-5">
-            <h5>Name : {auth.user.name}</h5>
-            <h5>Email : {auth.user.email}</h5>
-            <h5>Contact : {auth.user.phone}</h5>
-            <h5>Address : {auth.user.address}</h5>
+      <div className=" container-fluid">
+        <div className="row m-4">
+          <div className=" user-det col-md-3 mb-3 ps-3">
+            <h1 className=" mt-4 ">Profile</h1>
+            <p>Name : {auth.user.name}</p>
+            <p>Email : {auth.user.email}</p>
+            <p>Contact : {auth.user.phone}</p>
+            <p>Address : {auth.user.address}</p>
           </div>
-          <h1 className="mt-4 ">Orders</h1>
-          <div>
+          <div className="col-md-9 user-order">
+            <h1 className=" mt-4 ">Orders</h1>
             {orders.map((o, i) => {
               return (
                 <div className="border shadow mb-3">
@@ -71,7 +71,6 @@ const UserDashboard = () => {
                           <h5>{p.name}</h5>
                           <h6>Price : ₹ {p.price.toLocaleString("hi-IN")}</h6>
                         </div>
-                        
                       </div>
                     ))}
                   </div>

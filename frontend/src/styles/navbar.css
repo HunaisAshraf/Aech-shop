@@ -1,7 +1,7 @@
 .navbar {
   padding: 0;
   width: 100%;
-  height: 70px;
+  height: 85px;
   font-size: 1.2rem;
   background-color: #090125;
   color: white;
@@ -13,14 +13,14 @@
     margin:auto;
 }
 .link li{
-    padding:0 10%;
+    padding:0 9%;
 }
 
 
 .collapse {
   z-index: 1;
   background-color: #090125;
-  height: 70px;
+  /* height: 70px; */
 }
 .navbar-brand {
   font-size: 2.2rem;

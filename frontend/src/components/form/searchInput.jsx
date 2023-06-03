@@ -25,7 +25,7 @@ const SearchInput = () => {
       <form className="d-flex" role="search" onSubmit={handleSubmit}>
        
           <input
-            className="form-control me-2 rounded-5"
+            className="form-control mx-2 rounded-5"
             type="search"
             placeholder="Search"
             aria-label="Search"
@@ -33,11 +33,6 @@ const SearchInput = () => {
             onChange={(e) => setValues({ ...values, keyword: e.target.value })}
           />
         
-        {/* <button className="btn p-0" type="submit">
-          <AiOutlineSearch
-            style={{ fontSize: "1.8rem", fontWeight: "900", color: "#ffffff" }}
-          />
-        </button> */}
       </form>
     </div>
   );
