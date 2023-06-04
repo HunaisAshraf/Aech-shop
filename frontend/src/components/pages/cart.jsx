@@ -49,7 +49,7 @@ const Cart = () => {
   //get payment token
   const getToken = async () => {
     try {
-      const { data } = await axios.get("/api/braintree/token");
+      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/braintree/token`);
       setClientToken(data.clientToken);
     } catch (error) {
       console.log(error);
@@ -65,7 +65,7 @@ const Cart = () => {
     try {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post("/api/braintree/payment", {
+      const { data } = await axios.post(`${process.env.REACT_APP_API}/api/braintree/payment`, {
         nonce,
         cart,
       });
@@ -92,7 +92,7 @@ const Cart = () => {
               <div key={p._id} className="row card m-2 p-2 flex-row">
                 <div className="col-md-4">
                   <img
-                    src={`/api/product-photo/${p._id}`}
+                    src={`${process.env.REACT_APP_API}/api/product-photo/${p._id}`}
                     className="card-img-top"
                     alt="..."
                   />
@@ -128,12 +128,7 @@ const Cart = () => {
               <>
                 <div className="mb-3 text-center">
                   <h6>Address : {auth.user.address}</h6>
-                  {/* <button
-                    className="btn btn-warning mt-3 w-75"
-                    onClick={handleOrder}
-                  >
-                    Checkout
-                  </button> */}
+                  
                 </div>
               </>
             ) : (

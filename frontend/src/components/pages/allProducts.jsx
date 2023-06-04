@@ -19,7 +19,7 @@ const AllProducts = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get("/api/get-product");
+      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-product`);
       setProducts(res.data.products);
     } catch (error) {
       console.log(error);
@@ -32,7 +32,7 @@ const AllProducts = () => {
 
   const getAllCategory = async () => {
     try {
-      const res = await axios.get("/api/get-category");
+      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-category`);
       if (res.data.success) {
         setCategories(res.data.category);
       }
@@ -63,23 +63,12 @@ const AllProducts = () => {
   //get filtered products
   const filteredProducts = async () => {
     try {
-      const res = await axios.post("/api/product-filters", { checked, radio });
+      const res = await axios.post(`${process.env.REACT_APP_API}/api/product-filters`, { checked, radio });
       setProducts(res.data.products);
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const handleCart = (product) => {
-  //   if(cart.includes(product)){
-  //     console.log("duplicate");
-  //   }else{
-
-  //     setCart([...cart, product]);
-  //     localStorage.setItem("cart", JSON.stringify([...cart, product]));
-  //     toast.success("Item Added To Cart");
-  //   }
-  // };
 
   useEffect(() => {
     if (checked.length || radio.length) {
@@ -142,7 +131,7 @@ const AllProducts = () => {
                 style={{ width: "18rem" }}
               >
                 <img
-                  src={`/api/product-photo/${product._id}`}
+                  src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
                   className="card-img-top"
                   alt="..."
                 />
@@ -180,3 +169,4 @@ const AllProducts = () => {
 };
 
 export default AllProducts;
+

@@ -23,7 +23,7 @@ const Search = () => {
                 style={{ width: "18rem" }}
               >
                 <img
-                  src={`/api/product-photo/${product._id}`}
+                  src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
                   className="card-img-top"
                   alt="..."
                 />

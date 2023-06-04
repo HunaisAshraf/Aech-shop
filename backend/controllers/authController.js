@@ -178,3 +178,40 @@ export const orderStatusController = async (req, res) => {
     });
   }
 };
+
+//get all user
+export const getAllUserController = async(req,res) =>{
+  try {
+    const users = await userModel.find({})
+    res.status(200).send({
+      success: true,
+      message: "users list successfull",
+      users,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "error in getting users",
+      error,
+    });
+  }
+}
+
+//delete user
+export const deleteUserController = async(req,res)=>{
+  try {
+    const { id } = req.params;
+    const user = await userModel.findByIdAndDelete(id)
+    res.status(200).send({
+      success: true,
+      message: "user removed successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "error in removing user",
+      error,
+    });
+  }
+  }

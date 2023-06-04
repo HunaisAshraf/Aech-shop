@@ -23,7 +23,7 @@ const UpdateProduct = () => {
   //get single product
   const getSingleProduct = async () => {
     try {
-      const res = await axios.get(`/api/single-product/${params.slug}`);
+      const res = await axios.get(`${process.env.REACT_APP_API}/api/single-product/${params.slug}`);
       setName(res.data.product.name);
       setId(res.data.product._id);
       setDescription(res.data.product.description);
@@ -44,7 +44,7 @@ const UpdateProduct = () => {
   //get category
   const getAllCategory = async () => {
     try {
-        const res = await axios.get("/api/get-category")
+        const res = await axios.get(`${process.env.REACT_APP_API}/api/get-category`)
         if(res.data.success){
             setCategories(res.data.category)
         }
@@ -72,7 +72,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
       productData.append("shipping", shipping);
 
-      const res = await axios.put(`/api/update-product/${id}`, productData);
+      const res = await axios.put(`${process.env.REACT_APP_API}/api/update-product/${id}`, productData);
       if (res.data.success) {
         toast.success(`${name} Updates successfully`);
         navigate("/dashboard/admin/products");
@@ -89,7 +89,7 @@ const UpdateProduct = () => {
 
   const handleDelete = async()=>{
     try {
-        const res = await axios.delete(`/api/delete-product/${id}`)
+        const res = await axios.delete(`${process.env.REACT_APP_API}/api/delete-product/${id}`)
         if(res.data.success){
             toast.success("Product Seleted Successfully")
             navigate("/dashboard/admin/products")
@@ -152,7 +152,7 @@ const UpdateProduct = () => {
                   <div className="text-center">
                     <img
                       className="img img-responsive"
-                      src={`/api/product-photo/${id}`}
+                      src={`${process.env.REACT_APP_API}/api/product-photo/${id}`}
                       alt="product_photo"
                       height={"200px"}
                     />
