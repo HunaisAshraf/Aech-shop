@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import "../../styles/login.css";
+import { API_URL } from "../../helper/apiUrl";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/login`, {
+      const res = await axios.post(`${API_URL}/api/login`, {
         email,
         password,
       });

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { useCart } from "../../context/cart";
 import "../../styles/allProducts.css";
+import {API_URL} from "../../helper/apiUrl"
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -19,7 +20,7 @@ const AllProducts = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-product`);
+      const res = await axios.get(`${API_URL}/api/get-product`);
       setProducts(res.data.products);
     } catch (error) {
       console.log(error);
@@ -32,7 +33,7 @@ const AllProducts = () => {
 
   const getAllCategory = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-category`);
+      const res = await axios.get(`${API_URL}/api/get-category`);
       if (res.data.success) {
         setCategories(res.data.category);
       }
@@ -63,7 +64,7 @@ const AllProducts = () => {
   //get filtered products
   const filteredProducts = async () => {
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/product-filters`, { checked, radio });
+      const res = await axios.post(`${API_URL}/api/product-filters`, { checked, radio });
       setProducts(res.data.products);
     } catch (error) {
       console.log(error);
@@ -131,7 +132,7 @@ const AllProducts = () => {
                 style={{ width: "18rem" }}
               >
                 <img
-                  src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
+                  src={`${API_URL}/api/product-photo/${product._id}`}
                   className="card-img-top"
                   alt="..."
                 />

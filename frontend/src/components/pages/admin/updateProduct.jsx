@@ -5,6 +5,7 @@ import AdminMenu from "../../layout/adminMenu";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { API_URL } from "../../../helper/apiUrl";
 
 const UpdateProduct = () => {
   const [categories, setCategories] = useState([]);
@@ -23,7 +24,7 @@ const UpdateProduct = () => {
   //get single product
   const getSingleProduct = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/single-product/${params.slug}`);
+      const res = await axios.get(`${API_URL}/api/single-product/${params.slug}`);
       setName(res.data.product.name);
       setId(res.data.product._id);
       setDescription(res.data.product.description);
@@ -44,7 +45,7 @@ const UpdateProduct = () => {
   //get category
   const getAllCategory = async () => {
     try {
-        const res = await axios.get(`${process.env.REACT_APP_API}/api/get-category`)
+        const res = await axios.get(`${API_URL}/api/get-category`)
         if(res.data.success){
             setCategories(res.data.category)
         }
@@ -72,7 +73,7 @@ const UpdateProduct = () => {
       productData.append("category", category);
       productData.append("shipping", shipping);
 
-      const res = await axios.put(`${process.env.REACT_APP_API}/api/update-product/${id}`, productData);
+      const res = await axios.put(`${API_URL}/api/update-product/${id}`, productData);
       if (res.data.success) {
         toast.success(`${name} Updates successfully`);
         navigate("/dashboard/admin/products");
@@ -89,7 +90,7 @@ const UpdateProduct = () => {
 
   const handleDelete = async()=>{
     try {
-        const res = await axios.delete(`${process.env.REACT_APP_API}/api/delete-product/${id}`)
+        const res = await axios.delete(`${API_URL}/api/delete-product/${id}`)
         if(res.data.success){
             toast.success("Product Seleted Successfully")
             navigate("/dashboard/admin/products")
@@ -152,7 +153,7 @@ const UpdateProduct = () => {
                   <div className="text-center">
                     <img
                       className="img img-responsive"
-                      src={`${process.env.REACT_APP_API}/api/product-photo/${id}`}
+                      src={`${API_URL}/api/product-photo/${id}`}
                       alt="product_photo"
                       height={"200px"}
                     />

@@ -3,6 +3,7 @@ import Layout from "../layout/layout";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../../styles/productDetails.css";
+import { API_URL } from "../../helper/apiUrl";
 
 const ProductDetails = () => {
   const [product, setProduct] = useState([]);
@@ -12,7 +13,7 @@ const ProductDetails = () => {
   const getProduct = async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_API}/api/single-product/${params.slug}`
+        `${API_URL}/api/single-product/${params.slug}`
       );
       if (res.data.success) {
         setProduct(res.data.product);
@@ -31,7 +32,7 @@ const ProductDetails = () => {
       <div className="single-product">
         <div className="prdt-img">
           <img
-            src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
+            src={`${API_URL}/api/product-photo/${product._id}`}
             alt={product.name}
             height={"400px"}
           />

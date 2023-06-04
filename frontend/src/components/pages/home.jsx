@@ -6,6 +6,7 @@ import "../../styles/home.css";
 import { MdCalendarViewMonth, MdLocalShipping } from "react-icons/md";
 import { TiArrowSync } from "react-icons/ti";
 import { IoChatbubblesSharp } from "react-icons/io5";
+import { API_URL } from "../../helper/apiUrl";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -36,7 +37,7 @@ const AllProducts = () => {
 
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-product?limit=` + 5);
+      const res = await axios.get(`${API_URL}/api/get-product?limit=` + 5);
       setProducts(res.data.products);
     } catch (error) {
       console.log(error);
@@ -50,7 +51,7 @@ const AllProducts = () => {
 
   const getAllCategory = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-category`);
+      const res = await axios.get(`${API_URL}/api/get-category`);
       if (res.data.success) {
         setCategories(res.data.category);
       }
@@ -128,7 +129,7 @@ const AllProducts = () => {
                   style={{ width: "14rem" }}
                 >
                   <img
-                    src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
+                    src={`${API_URL}/api/product-photo/${product._id}`}
                     className="card-img-top"
                     alt="..."
                   />

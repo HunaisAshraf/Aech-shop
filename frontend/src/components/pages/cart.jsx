@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import DropIn from "braintree-web-drop-in-react";
+import { API_URL } from "../../helper/apiUrl";
 
 const Cart = () => {
   const [auth, setAuth] = useAuth();
@@ -49,7 +50,7 @@ const Cart = () => {
   //get payment token
   const getToken = async () => {
     try {
-      const { data } = await axios.get(`${process.env.REACT_APP_API}/api/braintree/token`);
+      const { data } = await axios.get(`${API_URL}/api/braintree/token`);
       setClientToken(data.clientToken);
     } catch (error) {
       console.log(error);
@@ -65,7 +66,7 @@ const Cart = () => {
     try {
       setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
-      const { data } = await axios.post(`${process.env.REACT_APP_API}/api/braintree/payment`, {
+      const { data } = await axios.post(`${API_URL}/api/braintree/payment`, {
         nonce,
         cart,
       });
@@ -92,7 +93,7 @@ const Cart = () => {
               <div key={p._id} className="row card m-2 p-2 flex-row">
                 <div className="col-md-4">
                   <img
-                    src={`${process.env.REACT_APP_API}/api/product-photo/${p._id}`}
+                    src={`${API_URL}/api/product-photo/${p._id}`}
                     className="card-img-top"
                     alt="..."
                   />

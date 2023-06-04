@@ -4,6 +4,7 @@ import AdminMenu from "../../layout/adminMenu";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../../helper/apiUrl";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,7 @@ const Products = () => {
   //get all product
   const getProducts = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/get-product`);
+      const res = await axios.get(`${API_URL}/api/get-product`);
       setProducts(res.data.products);
     } catch (error) {
       console.log(error);
@@ -39,7 +40,7 @@ const Products = () => {
                 >
                   <div className="card m-2" style={{ width: "18rem" }}>
                     <img 
-                      src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
+                      src={`${API_URL}/api/product-photo/${product._id}`}
                       className="card-img-top"
                       alt="..."
                     />

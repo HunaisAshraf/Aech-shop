@@ -4,13 +4,14 @@ import { useAuth } from "../../../context/auth";
 import axios from "axios";
 import moment from "moment";
 import "../../../styles/userDashboard.css";
+import { API_URL } from "../../../helper/apiUrl";
 
 const UserDashboard = () => {
   const [auth] = useAuth();
   const [orders, setOrders] = useState([]);
   const getOrders = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API}/api/orders`);
+      const res = await axios.get(`${API_URL}/api/orders`);
       setOrders(res.data);
     } catch (error) {
       console.log(error);
@@ -62,7 +63,7 @@ const UserDashboard = () => {
                       <div key={p._id} className="me-3 border shadow p-4">
                         <div>
                           <img
-                            src={`${process.env.REACT_APP_API}/api/product-photo/${p._id}`}
+                            src={`${API_URL}/api/product-photo/${p._id}`}
                             className="card-img-top"
                             alt="..."
                           />

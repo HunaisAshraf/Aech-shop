@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../layout/layout";
 import { useSearch } from "../../context/search";
+import { API_URL } from "../../helper/apiUrl";
 
 const Search = () => {
   const [values, setValues] = useSearch();
@@ -23,7 +24,7 @@ const Search = () => {
                 style={{ width: "18rem" }}
               >
                 <img
-                  src={`${process.env.REACT_APP_API}/api/product-photo/${product._id}`}
+                  src={`${API_URL}/api/product-photo/${product._id}`}
                   className="card-img-top"
                   alt="..."
                 />

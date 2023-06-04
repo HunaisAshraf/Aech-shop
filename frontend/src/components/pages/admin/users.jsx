@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../layout/layout";
 import AdminMenu from "../../layout/adminMenu";
 import axios from "axios";
+import { API_URL } from "../../../helper/apiUrl";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ const Users = () => {
   const getUser = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API}/api/get-users`
+        `${API_URL}/api/get-users`
       );
       setUsers(data.users);
     } catch (error) {
@@ -24,7 +25,7 @@ const Users = () => {
   const handleDelete = async (id) => {
     try {
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_API}/api/delete-users/${id}`
+        `${API_URL}/api/delete-users/${id}`
       );
       getUser()
     } catch (error) {

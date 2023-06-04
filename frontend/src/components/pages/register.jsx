@@ -4,6 +4,7 @@ import "../../styles/register.css";
 import toast from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../../helper/apiUrl";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -17,7 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API}/api/register`, {
+      const res = await axios.post(`${API_URL}/api/register`, {
         name,
         email,
         phone,
